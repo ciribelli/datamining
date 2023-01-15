@@ -21,7 +21,6 @@ def filtra(s):
 def plota(f, s, item, a):
     axs[item, 0].plot(s.index, s['umidade'], f.index, f['umidade'])
     axs[item, 1].plot(s.index, s['temperatura'], f.index, f['temperatura'])
-    #axs[item, 0].set(xlabel='tempo', ylabel='temp')
     axs[item, 0].grid()
     axs[item, 1].grid()
     return(plt)
@@ -30,8 +29,8 @@ def classifica(df, i):
     dfs = df.set_index('data')[i['t0']:i['tf']]
     dfs = dfs.loc[dfs['local_id'] == i['local_id']]
     dfs = dfs.drop(['id'], axis=1)
-    dfs['classificacao'] = 'ON'
-    dfs['classificacao'] = np.where(dfs.index >= i['toff'], 'OFF', dfs['classificacao'])
+    dfs['classificacao'] = 1
+    dfs['classificacao'] = np.where(dfs.index >= i['toff'], 0, dfs['classificacao'])
     return dfs
 
 def segmentaInicio(u):
@@ -89,6 +88,15 @@ intervalo_06 = {'t0': '2020-04-11 00:05', 'ti': '2020-04-11 01:12', 'tf': '2020-
 l = [intervalo_01, intervalo_02, intervalo_03, intervalo_04, intervalo_05, intervalo_06]
 
 fig, axs = plt.subplots(6, 2)
+size=8
+params = {'legend.fontsize': 'large',
+          'figure.figsize': (20,8),
+          'axes.labelsize': size,
+          'axes.titlesize': size,
+          'xtick.labelsize': size*0.75,
+          'ytick.labelsize': size*0.75,
+          'axes.titlepad': 25}
+plt.rcParams.update(params)
 dF = pd.DataFrame()
 
 # item eh o indice do for para geracao dos graficos // i eh o objeto intervalo
