@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 
 
 def load_sql():
-    con = sqlite3.connect("/Users/ciribelli/Server/Data Mining/db.sqlite3")
+    #con = sqlite3.connect("/Users/ciribelli/Server/Data Mining/db.sqlite3")
+    con = sqlite3.connect("C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//db.sqlite3")
     saida = pd.read_sql_query("SELECT * from controleambiente_ambiente", con)
     saida['data'] =  pd.to_datetime(saida['data'], format='%Y-%m-%d %H:%M:%S')
     con.close()
@@ -21,7 +22,6 @@ def filtra(s):
 def plota(f, s, item, a):
     axs[item, 0].plot(s.index, s['umidade'], f.index, f['umidade'])
     axs[item, 1].plot(s.index, s['temperatura'], f.index, f['temperatura'])
-    #axs[item, 0].set(xlabel='tempo', ylabel='temp')
     axs[item, 0].grid()
     axs[item, 1].grid()
     return(plt)
@@ -108,7 +108,7 @@ for item, i in enumerate(l):
 plt.show()
 
 # salva arquivo csv
-dF.to_csv('/Users/ciribelli/Server/Data Mining/datasetDM.csv', index=True)
+dF.to_csv('C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//datasetDM.csv', index=True)
 print('Arquivo salvo')
 
 

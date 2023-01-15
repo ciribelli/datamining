@@ -1,10 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.neural_network import MLPClassifier
 import seaborn as sns
 
-df = pd.read_csv('/Users/ciribelli/Server/Data Mining/datasetDM.csv')
-
+#df = pd.read_csv('/Users/ciribelli/Server/Data Mining/datasetDM.csv')
+df = pd.read_csv('C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//datasetDM.csv')
 
 df = df.loc[df['local_id'] == 0]
 

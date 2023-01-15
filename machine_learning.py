@@ -4,9 +4,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 import seaborn as sns
 import numpy as np
-import random
 
-df = pd.read_csv('/Users/ciribelli/Server/Data Mining/datasetDM.csv')
+df = pd.read_csv('C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//datasetDM.csv')
 df=df.replace(to_replace="ON",value=1)
 df=df.replace(to_replace="OFF",value=0)
 df = df.loc[df['local_id'] == 1]
@@ -31,10 +30,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratif
 
 ############ NORMALIZACAO
 
-# from sklearn.preprocessing import StandardScaler
-# scaler = StandardScaler().fit(X_train)
-# X_train = scaler.transform(X_train)
-# X_test = scaler.transform(X_test)
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler().fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
 
 
 
@@ -60,11 +59,11 @@ def train(X_train, y_train):
 #     model.fit(X_train, y_train)
 #     return model
 
-# from sklearn import svm
-# def train(X_train, y_train):
-#     model = svm.SVC()
-#     model.fit(X_train, y_train)
-#     return model
+from sklearn import svm
+def train(X_train, y_train):
+    model = svm.SVC()
+    model.fit(X_train, y_train)
+    return model
 
 
 
