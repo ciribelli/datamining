@@ -4,8 +4,10 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 import seaborn as sns
 import numpy as np
+import pathlib
 
-df = pd.read_csv('C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//datasetDM.csv')
+path = pathlib.Path(__file__).parent.resolve()
+df = pd.read_csv(pathlib.PurePath(path, 'datasetDM.csv'))
 df=df.replace(to_replace="ON",value=1)
 df=df.replace(to_replace="OFF",value=0)
 df = df.loc[df['local_id'] == 1]

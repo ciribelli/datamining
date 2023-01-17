@@ -1,9 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pathlib
 
-#df = pd.read_csv('/Users/ciribelli/Server/Data Mining/datasetDM.csv')
-df = pd.read_csv('C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//datasetDM.csv')
+path = pathlib.Path(__file__).parent.resolve()
+df = pd.read_csv(pathlib.PurePath(path, 'datasetDM.csv'))
 
 df = df.loc[df['local_id'] == 1]
 

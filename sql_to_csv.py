@@ -2,11 +2,11 @@ import pandas as pd
 import sqlite3
 import numpy as np
 import matplotlib.pyplot as plt
+import pathlib
 
 
-def load_sql():
-    #con = sqlite3.connect("/Users/ciribelli/Server/Data Mining/db.sqlite3")
-    con = sqlite3.connect("C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//db.sqlite3")
+def load_sql(path):
+    con = sqlite3.connect(pathlib.PurePath(path, 'db.sqlite3'))
     saida = pd.read_sql_query("SELECT * from controleambiente_ambiente", con)
     saida['data'] =  pd.to_datetime(saida['data'], format='%Y-%m-%d %H:%M:%S')
     con.close()
@@ -76,7 +76,8 @@ def aplica_janela(daux):
 
 
 # Inicio
-df = load_sql() # dataframe original
+path = pathlib.Path(__file__).parent.resolve()
+df = load_sql(path) # dataframe original
 ds = filtra(df) # dataframe filtrado
 
 intervalo_01 = {'t0': '2018-12-05 15:10', 'ti': '2018-12-05 16:28', 'tf': '2018-12-06 14:00', 'toff': '2018-12-06 01:36', 'local_id': 0}
