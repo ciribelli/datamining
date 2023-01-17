@@ -11,22 +11,10 @@ df=df.replace(to_replace="OFF",value=0)
 df = df.loc[df['local_id'] == 1]
 # features selecionadas
 df = df.loc[:,['temp_media_15',	'temp_desvpad_60', 'temp_variancia_30',	'temp_media_30', 'temp_amplitude_60', 'classificacao']]
-#df = df.loc[:,['classificacao', 'umid_amplitude_30',	'umid_desvpad_30',	'umid_media_30', 'umid_variancia_30']]
-#df = df.loc[:,['temp_media_30',	'temp_desvpad_30', 'temp_variancia_30',	'temp_media_30', 'temp_amplitude_60', 'temperatura', 'classificacao']]
 X = df.loc[:,df.columns != 'classificacao']  # Entrada
-y = df.classificacao    # Saida
+y = df.classificacao   # Saida
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
 
-
-
-
-
-############ FEATURE SELECTION
-
-# from sklearn.feature_selection import SelectKBest
-# from sklearn.feature_selection import chi2
-# X_new = SelectKBest(chi2, k=3).fit_transform(X, y)
-# print(X_new)
 
 ############ NORMALIZACAO
 
@@ -39,11 +27,11 @@ X_test = scaler.transform(X_test)
 
 
 # treinar modelo
-from sklearn.ensemble import RandomForestClassifier
-def train(X_train, y_train):
-    model = RandomForestClassifier(min_samples_leaf=5, bootstrap=False) # tente mudar parâmetro para evitar overfitting
-    model.fit(X_train, y_train)
-    return model
+# from sklearn.ensemble import RandomForestClassifier
+# def train(X_train, y_train):
+#     model = RandomForestClassifier(min_samples_leaf=5, bootstrap=False) # tente mudar parâmetro para evitar overfitting
+#     model.fit(X_train, y_train)
+#     return model
 
 # treinar modelo
 # from sklearn.ensemble import GradientBoostingClassifier
@@ -64,27 +52,6 @@ def train(X_train, y_train):
     model = svm.SVC()
     model.fit(X_train, y_train)
     return model
-
-
-
-#### COMITE ####################
-
-# from sklearn import datasets
-# from sklearn.model_selection import cross_val_score
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.naive_bayes import GaussianNB
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.ensemble import VotingClassifier
-
-# clf1 = LogisticRegression(random_state=1)
-# clf2 = RandomForestClassifier(n_estimators=50, random_state=1)
-# clf3 = GaussianNB()
-
-# eclf = VotingClassifier( estimators=[('lr', clf1), ('rf', clf2), ('gnb', clf3)],voting='hard')
-# for clf, label in zip([clf1, clf2, clf3, eclf], ['Logistic Regression', 'Random Forest', 'naive Bayes', 'Ensemble']): 
-#     scores = cross_val_score(clf, X_train, y_train, scoring='accuracy', cv=5)
-# print("Accuracy: %0.2f (+/- %0.2f) [%s]" % (scores.mean(), scores.std(), label))
-
 
 
 

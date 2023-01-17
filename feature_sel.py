@@ -5,13 +5,15 @@ import seaborn as sns
 #df = pd.read_csv('/Users/ciribelli/Server/Data Mining/datasetDM.csv')
 df = pd.read_csv('C://Users//Ciribelli//OneDrive//Documentos//BI Master//DM//datamining//datasetDM.csv')
 
-df = df.loc[df['local_id'] == 0]
+df = df.loc[df['local_id'] == 1]
 
-# 3 opcoes de janela para selecao de parametros
-#df = df.loc[:,['temp_desvpad_15',	'temp_variancia_15',	'temp_media_15',	'temp_amplitude_15', 'classificacao']]#, 'temp_desvpad_30',	'temp_variancia_30',	'temp_media_30',	'temp_amplitude_30',	'temp_desvpad_60',	'temp_variancia_60',	'temp_media_60',	'temp_amplitude_60']]
-#df = df.loc[:,['temp_desvpad_30',	'temp_variancia_30',	'temp_media_30',	'temp_amplitude_30', 'classificacao']]
-#df = df.loc[:,['temp_desvpad_60',	'temp_variancia_60',	'temp_media_60',	'temp_amplitude_60', 'classificacao']]
-df = df.loc[:,['classificacao', 'umid_amplitude_30',	'umid_desvpad_30',	'umid_media_30', 'umid_variancia_30', 'umidade']]
+# opcoes de janela para selecao de parametros
+#df = df.loc[:,['classificacao', 'umid_amplitude_30',	'umid_desvpad_30',	'umid_media_30', 'umid_variancia_30']] # local_id = 0
+#df = df.loc[:,['temp_desvpad_60','temp_variancia_60', 'temp_media_60', 'temp_amplitude_60', 'classificacao']] # local_id = 1
+#df = df.loc[:,['temp_desvpad_30', 'temp_variancia_30',  'temp_media_30', 'temp_amplitude_30', 'classificacao']] # local_id = 1
+
+# opcao selecionada
+df = df.loc[:,['temp_media_15',	'temp_desvpad_60', 'temp_variancia_30',	'temp_media_30', 'temp_amplitude_60', 'classificacao']] # local_id = 1
 
 print(df.head())
 
