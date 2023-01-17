@@ -1,10 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 import seaborn as sns
-import numpy as np
 import pathlib
+import joblib
 
 path = pathlib.Path(__file__).parent.resolve()
 df = pd.read_csv(pathlib.PurePath(path, 'datasetDM.csv'))
@@ -20,44 +19,41 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratif
 
 ############ NORMALIZACAO
 
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler().fit(X_train)
-X_train = scaler.transform(X_train)
-X_test = scaler.transform(X_test)
+# from sklearn.preprocessing import StandardScaler
+# scaler = StandardScaler().fit(X_train)
+# X_train = scaler.transform(X_train)
+# X_test = scaler.transform(X_test)
 
 
 
+from sklearn.ensemble import RandomForestClassifier
+def train(X_train, y_train):
+    model = RandomForestClassifier(min_samples_leaf=5, bootstrap=False) # tente mudar parâmetro para evitar overfitting
+    model.fit(X_train, y_train)
+    return model
 
-# treinar modelo
-# from sklearn.ensemble import RandomForestClassifier
-# def train(X_train, y_train):
-#     model = RandomForestClassifier(min_samples_leaf=5, bootstrap=False) # tente mudar parâmetro para evitar overfitting
-#     model.fit(X_train, y_train)
-#     return model
-
-# treinar modelo
 # from sklearn.ensemble import GradientBoostingClassifier
 # def train(X_train, y_train):
 #     model = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=3, random_state=0)
 #     model.fit(X_train, y_train)
 #     return model
 
-#treinar modelo
 # from sklearn.neural_network import MLPClassifier
 # def train(X_train, y_train):
 #     model = MLPClassifier(hidden_layer_sizes=(100,100,100), max_iter=500, alpha=0.0001, solver='adam', verbose=True, random_state=21 ,tol=0.000001)
 #     model.fit(X_train, y_train)
 #     return model
 
-from sklearn import svm
-def train(X_train, y_train):
-    model = svm.SVC()
-    model.fit(X_train, y_train)
-    return model
+# from sklearn import svm
+# def train(X_train, y_train):
+#     model = svm.SVC()
+#     model.fit(X_train, y_train)
+#     return model
 
 
 
 model = train(X_train, y_train)
+joblib.dump(model, 'ml.pkl', compress=9) # salva o arquivo pickle
 
 def predict_and_evaluate(model, X_test, y_test):
 
@@ -101,5 +97,4 @@ print('Resultados de Treino')
 predict_and_evaluate(model, X_train, y_train)
 print('Resultados de Teste')
 predict_and_evaluate(model, X_test, y_test)
-
 
