@@ -25,7 +25,7 @@ y_pred = model.predict(X) # inferência do teste
 print(classification_report(y, y_pred))
 
 # ajuste da janela de plot para efeito de otimizacao do tempo
-d = 0
+d = 1500
 i = 0 + d
 f = 1000 + d
 
